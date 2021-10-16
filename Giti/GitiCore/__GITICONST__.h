@@ -22,9 +22,11 @@
 
 #define uChar unsigned char
 #define uShort unsigned short
+#define cShort const short
 #define cuShort const unsigned short
 #define cuChar const unsigned char
 #define uInt unsigned int
 #define uLong unsigned long
+#define cFloat const float
 
 #endif // __GITICONST__

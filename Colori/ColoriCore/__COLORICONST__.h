@@ -29,15 +29,6 @@ enum coloriFamilia{
      C_TURQUESA = 0x3, C_PISTACHO = 0x9, C_ROJO      = 0xe, C_PURPURA = 0x13,
      C_CYAN     = 0x5, C_OLIVO    = 0xa, C_ROSA      = 0xf,
      C_AQUA     = 0x6, C_AMARILLO = 0xb, C_ESCARLATA = 0x10};
-/*
-enum coloriFamilia{
-     C_NONE = 0x0,      C_NEGRO    = 0x8,  C_BLANCO  = 0xF,
-
-     C_VIOLETA  = 0x11, C_JADE     = 0x12, C_OCRE    = 0x24, C_MORADO = 0x41,
-     C_AZUL     = 0x1 , C_VERDE    = 0x2,  C_NARANJA = 0x22, C_MAGENTA =0x5,
-     C_TURQUESA = 0x21, C_OLIVO    = 0x42, C_ROJO    = 0x4,  C_NEUTRO = 0x7,
-     C_CYAN     = 0x3,  C_AMARILLO = 0x6,  C_ROSA    = 0x14, C_ESCARLATA = 0x66,
-     C_INDIGO   = 0x77, C_PURPURA  = 0x88, C_AQUA    = 0x99, C_PISTACHO = 0xaa};*/
 
 
 enum coloridx {base         = 0x0,   opuesto      = 0x6, todo = 0xc,
