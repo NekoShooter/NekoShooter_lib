@@ -1,5 +1,5 @@
 #include "ColoriBasic.h"
-#include "../Giti/GitiCore/GitiBits.h"
+#include "GitiBits.h"
 #include "__COLORICONST__.h"
 
 
@@ -43,7 +43,7 @@ short int_a_css(long Valor,char *CSS){
     return rgb_a_css(r,g,b,CSS);}
 
 
-short int_a_rgb(long Valor,unsigned short *r,unsigned short *g,unsigned short *b){
+short int_a_rgb(long Valor,short *r,short *g,short *b){
     if(Valor > BLANCO || Valor < NEGRO) return COLORI_ERROR;
     *b = aBytes(&Valor,8);
     *g = aBytes(&Valor,8);

@@ -1,7 +1,7 @@
 #include "ColoriRGB.h"
-#include "../ColoriCore/ColoriBasic.h"
-#include "../ColoriCore/__COLORICONST__.h"
-#include "../ColoriCore/ColoriMath.h"
+#include "ColoriBasic.h"
+#include "__COLORICONST__.h"
+#include "ColoriMath.h"
 
 Colori_rgb::Colori_rgb(){ inicializar();}
 

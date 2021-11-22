@@ -1,4 +1,5 @@
 #include "ColoriMath.h"
+#include "GitiBits.h"
 
 short dividir_tono(short Tono, short *Claro, short *Oscuro,double Nivel_Brillo, double Nivel_Oscuro){
     if(Tono < NEGRO || Claro == Nulo || Oscuro == Nulo|| Nivel_Brillo < 0x0 || Nivel_Oscuro < 0x0)
@@ -239,7 +240,7 @@ void buscar_familia(c_rgb * _rgb_){
                 desendiente_mayor = C_AMARILLO;}
             break;
 
-        case _B_:
+        default : // case _B_ :
             if(idx_med == _R_){
                 desendiente_menor = C_MORADO;
                 desendiente_medio = C_PURPURA;
@@ -248,9 +249,7 @@ void buscar_familia(c_rgb * _rgb_){
                 desendiente_menor = C_INDIGO;
                 desendiente_medio = C_TURQUESA;
                 desendiente_mayor = C_CYAN;}
-            break;
-
-    default:break;}
+            break;}
 
 
 
@@ -310,7 +309,7 @@ coloriFamilia rgbSort(const c_rgb * Crgb,uChar* idx_max, uChar *idx_med, uChar *
 void definir_limite_ascendente(uShort refencia, uChar *limite_min, uChar *limite_max){
     uChar der4bits, izq4bits;
 
-    der4bits = aBytes(&refencia,4);
+    der4bits = aBytes((long *)&refencia,4);
     izq4bits = refencia;
 
     if (izq4bits != 0){
@@ -339,7 +338,7 @@ void definir_limite_desendente(uShort refencia, uChar *limite_min, uChar *limite
     uChar porcentaje_min,  der4bits,
           porcentaje_max,  izq4bits;
 
-    der4bits = aBytes(&refencia,4);
+    der4bits = aBytes((long *)&refencia,4);
     izq4bits = refencia;
 
     porcentaje_max = ((izq4bits * 100)/ 0xf) *33;

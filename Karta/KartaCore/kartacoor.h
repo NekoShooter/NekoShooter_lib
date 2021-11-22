@@ -5,16 +5,14 @@
 #include <Qt>
 #include "kartavar.h"
 #include "__KARTACONST__.h"
-#include "../Giti/GitiCore/__GITICONST__.h"
+#include "__GITICONST__.h"
 #include <QSize>
 #include <QPoint>
 
 class QMouseEvent;
 class QWidget;
 class QRect;
-//class QSize;
 class QPointF;
-//class QPoint;
 
 /***********************************************************************************************/
 #define _H_ 0
@@ -46,6 +44,7 @@ class kcelda{
         bool esValido() const;
         void cambiarTam(const QSize &tamanyo);
         void recargar(const QSize &tamanyo,const QWidget *WIDGET = nullptr,const Karta::Modo &Modo = Karta::Relativo);
+        void restringirMov(const Karta::orientacion &mov);
 
         inline void Widget(const QWidget *WIDGET){widget = WIDGET;}
         inline void agregarMargenDer(cuShort &derecho){margenH_der = derecho;}
@@ -82,6 +81,7 @@ class kcelda{
 
         const QWidget *widget =nullptr;
         k_index indices;
+        bool mov_h, mov_v;
 
     };
 #endif // KARTACOOR_H

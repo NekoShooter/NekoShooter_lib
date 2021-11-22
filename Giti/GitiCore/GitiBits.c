@@ -1,7 +1,7 @@
 #include "GitiBits.h"
 
 
-short aBytes(unsigned long *_int,unsigned char nBits){
+short aBytes(long *_int,unsigned char nBits){
     if (!_int) return GITI_ERROR;
 
     long intFull = (*_int >> nBits)<<nBits;
@@ -22,7 +22,7 @@ char int4bitsAhex (unsigned short int4bits, BOOL invertir){
 
 
 
-short charHexAint4bits(const char *_char){
+short charHexAint4bits(const char _char){
     if(_char >= '0' && _char <= '9')
         return(short)_char - 48;
     else if(_char >= 'A' && _char <= 'F')
@@ -35,7 +35,7 @@ short charHexAint4bits(const char *_char){
 
 
 
-short intAhex(unsigned long _int,char *Hexadecimal,unsigned short longitudHexa,BOOL hashtag){
+short intAhex(long _int,char *Hexadecimal,unsigned short longitudHexa,BOOL hashtag){
     if(Hexadecimal == INVALIDO) return GITI_ERROR;
 
     short valor, limite = -1;

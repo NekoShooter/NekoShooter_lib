@@ -1,8 +1,8 @@
 #include "ColoriColor.h"
-#include "../Giti/GitiCore/GitiBits.h"
-#include "../ColoriCore/ColoriBasic.h"
-#include "../ColoriCore/__COLORICONST__.h"
-#include "../ColoriCore/ColoriMath.h"
+#include "GitiBits.h"
+#include "ColoriBasic.h"
+#include "__COLORICONST__.h"
+#include "ColoriMath.h"
 
 
 ColoriColor::ColoriColor():Colori_rgb(){asignarFamilia(true);}

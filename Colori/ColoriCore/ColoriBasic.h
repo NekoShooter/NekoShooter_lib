@@ -13,7 +13,7 @@ short rgb_a_hex(unsigned short r,unsigned short g,unsigned short b,char *Hexadec
 short rgb_a_css(unsigned short r,unsigned short g,unsigned short b,char *CSS);
 
 short int_a_css(long Valor,char *CSS);
-short int_a_rgb(long Valor,unsigned short *r,unsigned short *g,unsigned short *b);
+short int_a_rgb(long Valor, short *r, short *g, short *b);
 short int_a_hex(long Valor,char *Hexadecimal,short longitudHexa);
 
 long  hex_a_int(const char *Hexadecimal);

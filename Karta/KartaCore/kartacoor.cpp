@@ -66,7 +66,8 @@ void kcelda::__cargarDatos(){
     margenH_der = margenH_izq = moverEnH =
     margenV_sup = margenV_inf = moverEnV =
     scroll_h = scroll_v = 0;
-    indices.data = KARTA_ERROR;}
+    indices.data = KARTA_ERROR;
+    mov_h = mov_v = true;}
 
 kcelda::~kcelda(){
     if(Tam)   delete Tam;
@@ -89,6 +90,20 @@ void kcelda::BorrarRecuadro(){
     frame.setWidth(0);
     frame.setHeight(0);
     moverEnH = moverEnV = 0;}
+
+void kcelda::restringirMov(const Karta::orientacion &mov){
+    switch (mov) {
+    case Karta::Horizontal:
+        mov_v = false;
+        mov_h = true;
+        break;
+    case Karta::Vertical:
+        mov_h = false;
+        mov_v = true;
+        break;
+    default:
+        mov_h = mov_v = true;
+        break;}}
 
 void kcelda::Recuadro(const QSize &recuadro_interno, const Qt::Alignment &Alineacion){
     if(recuadro_interno.isEmpty() || (Tam->height() < recuadro_interno.height() || Tam->width() < recuadro_interno.width()))
@@ -135,8 +150,8 @@ QRect kcelda::qrect(cuShort &idx_h, cuShort &idx_v){
 
     if(!cursor_desplazado->isNull()){
         if(indices.indice[_H_] == idx_h && indices.indice[_V_] == idx_v){
-            coor.setX(coor.rx() + (cursor_desplazado->rx() - cursor_click->rx()));
-            coor.setY(coor.ry() + (cursor_desplazado->ry() - cursor_click->ry()));}}
+            if(mov_h) coor.setX(coor.rx() + (cursor_desplazado->rx() - cursor_click->rx()));
+            if(mov_v) coor.setY(coor.ry() + (cursor_desplazado->ry() - cursor_click->ry()));}}
 
     if(coor.ry() < margenV_sup){
         if(modo ==  Karta::Relativo){

@@ -1,7 +1,7 @@
 #ifndef __Colori__rgb__
 #define __Colori__rgb__
 #include "__COLORICONST__.h"
-#include "../Giti/GitiCore/__GITICONST__.h"
+#include "__GITICONST__.h"
 
 #ifdef __cplusplus
 extern "C"

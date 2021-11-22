@@ -1,7 +1,7 @@
 #ifndef __ColoriRGB
 #define __ColoriRGB
 
-#include "../ColoriCore/Colori__rgb__.h"
+#include "Colori__rgb__.h"
 
 class Colori_rgb
 {
