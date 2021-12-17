@@ -133,7 +133,7 @@ const k_index &kcelda::mousePos(QMouseEvent *event){
 
         indices.indice[_H_] = (event->pos().rx() - margenH_izq)/Tam->rwidth();
         indices.indice[_V_] = (event->pos().ry() - margenV_sup)/Tam->rheight();}
-    return  indices;}
+    return indices;}
 
 
 

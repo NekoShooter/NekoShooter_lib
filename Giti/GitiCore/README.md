@@ -3,7 +3,7 @@
 <h4>una libreria de manejo de bits</h4><br/>
   <a href="https://github.com/NekoShooter?tab=repositories&q=c&type=&language="><img src="https://i.ibb.co/1Q10GFX/C.png" alt="C" width='50'></a>
   <br/><br/>
-  <a href= #><img src="https://i.ibb.co/Qb8TVqf/giti.png" alt="Giti" width="200"></a> 
+  <a href=#><img src="https://i.ibb.co/NV1Jqks/giti.png" alt="giti" width="200"></a> 
   
   <br/><br/>
 
