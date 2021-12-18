@@ -29,5 +29,7 @@
 #define cuInt const unsigned int
 #define uLong unsigned long
 #define cFloat const float
+#define cDouble const double
+#define cuDouble const unsigned double
 
 #endif // __GITICONST__

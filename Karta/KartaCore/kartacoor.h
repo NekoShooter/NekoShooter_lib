@@ -24,7 +24,9 @@ union k_index{
 
 /***********************************************************************************************/
 QPointF coordenadasCirculares(const QPointF &CENTRO, cFloat &RADIO, cFloat &NumDeSecciones, cFloat &index, Karta::Sentido sentido = Karta::Radial);
-
+QPointF rotarCoordenada(const QPointF &ancla, const QPointF &punto_a_girar, cuShort &ang);
+QPointF rotarCoordenada(const QPoint &ancla,const QPoint &punto_a_girar,cuShort &ang);
+QPointF rotarCoordenada(cDouble &ancla_x, cDouble &ancla_y, cDouble &coor_x, cDouble &coor_y, cuShort &ang);
 /***********************************************************************************************/
 
 class kcelda{

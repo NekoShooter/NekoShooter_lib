@@ -1,4 +1,5 @@
 #include "kartacoor.h"
+#include "kartamath.h"
 #include <QMouseEvent>
 #include <math.h>
 #include <QWidget>
@@ -32,6 +33,28 @@ QPointF coordenadasCirculares(const QPointF &CENTRO, cFloat &RADIO, cFloat &NumD
 
     return QPointF((CENTRO.x() + punto_coor_x),(CENTRO.y() - punto_coor_y));}
 
+
+/***********************************************************************************************/
+QPointF rotarCoordenada(cDouble &ancla_x, cDouble &ancla_y, cDouble &coor_x, cDouble &coor_y, cuShort &ang){
+    double longitud = longitud_de_la_recta(ancla_x,ancla_y,coor_x,coor_y);
+    double *angulos = angulo_de_la_recta(ancla_x,ancla_y,coor_x,coor_y);
+    double total = angulos[0] + ang;
+    delete angulos;
+    double x = 90 -(total < 360? total : total - 360);
+    double y = 90 - fabs(x);
+
+    double punto_x = sin(rad(x)) * longitud;
+    double punto_y = sin(rad(y)) * longitud;
+    return QPointF((ancla_x + punto_x), (ancla_y - punto_y));}
+
+
+QPointF rotarCoordenada(const QPointF &ancla, const QPointF &punto_a_girar, cuShort &ang){
+    if(ancla == punto_a_girar) return punto_a_girar;
+    return rotarCoordenada(ancla.x(),ancla.y(),punto_a_girar.x(), punto_a_girar.y(),ang);}
+
+QPointF rotarCoordenada(const QPoint &ancla,const QPoint &punto_a_girar,cuShort &ang){
+    if(ancla == punto_a_girar) return punto_a_girar;
+    return rotarCoordenada(ancla.x(),ancla.y(),punto_a_girar.x(), punto_a_girar.y(),ang);}
 
 
 /***********************************************************************************************/
