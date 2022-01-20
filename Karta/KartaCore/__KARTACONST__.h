@@ -2,6 +2,8 @@
 #define __KARTACONST___H
 
 #define KARTA_ERROR -1
+#define ANGULO_VALIDO(ang) (ang > 0 && 360 > ang)
+#define ANGULO_ERRONEO(ang)(ang < 0 || ang > 360)
 
 
 namespace Karta {

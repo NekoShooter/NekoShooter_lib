@@ -1,35 +1,12 @@
-#ifndef KARTACOOR_H
-#define KARTACOOR_H
+#ifndef KCELDA_H
+#define KCELDA_H
+#include "kartacoor.h"
+#include <QSize>
+#include <QPoint>
+class QSize;
+class QMouseEvent;
+class QRect;
 
-
-//#include <Qt>
-//#include "kartavar.h"
-#include "__KARTACONST__.h"
-#include "__GITICONST__.h"
-//#include <QSize>
-//#include <QPoint>
-
-//class QMouseEvent;
-class QWidget;
-//class QRect;
-class QPointF;
-class QPoint;
-
-/***********************************************************************************************/
-#define _H_ 0
-#define _V_ 1
-
-union k_index{
-    uInt data;
-    uShort indice[2];};
-
-/***********************************************************************************************/
-QPointF coordenadasCirculares(const QPointF &CENTRO, cFloat &RADIO, cFloat &NumDeSecciones, cFloat &index, Karta::Sentido sentido = Karta::Radial);
-QPointF rotarCoordenada(const QPointF &ancla, const QPointF &coor, cDouble &ang, const bool &anti_radial = false);
-QPointF rotarCoordenada(const QPoint &ancla,const QPoint &coor,cDouble &ang, const bool &anti_radial = false);
-QPointF rotarCoordenada(cDouble &ancla_x, cDouble &ancla_y, cDouble &coor_x, cDouble &coor_y, cDouble &ang, const bool &anti_radial = false);
-/***********************************************************************************************/
-/*
 class kcelda{
     public:
         kcelda(const QWidget *WIDGET);
@@ -86,5 +63,6 @@ class kcelda{
         k_index indices;
         bool mov_h, mov_v;
 
-    };*/
-#endif // KARTACOOR_H
+    };
+
+#endif // KCELDA_H

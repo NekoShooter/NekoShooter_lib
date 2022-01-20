@@ -26,7 +26,7 @@ c_rgb *complemento(const c_rgb *original ,uChar estilo){
         case C_VERDE: case C_PISTACHO:
             return tercio(original,DERECHA);
 
-       case C_ROJO:
+        case C_ROJO:
             return  tercio(original,IZQUIERDA);
 
         case C_MORADO: case C_PURPURA:
@@ -40,8 +40,8 @@ c_rgb *complemento(const c_rgb *original ,uChar estilo){
 
             rgbSort(original,&MP_max, &MP_med, &MP_min);
             rgbSort(inver,&Am_max, &Am_med, &Am_min);
-            if(MP_max < 128){
 
+            if(MP_max < 128){
                 if(((inver->rgb[Am_med] / 2) + original->rgb[MP_max]) > 0xff)
                      compl->rgb[_R_] = 0xff;
                 else compl->rgb[_R_] = (inver->rgb[Am_med] / 2) + original->rgb[MP_max];
@@ -52,7 +52,6 @@ c_rgb *complemento(const c_rgb *original ,uChar estilo){
                 compl->rgb[_B_] = (inver->rgb[Am_min] + original->rgb[MP_min]) / 2;}
 
             else{
-
                 for(uChar i= 0; i < 3; ++i){
                     if(i == _B_)
                         compl->rgb[i] = (temp->rgb[i] + inver->rgb[i]) / CONST_ARTE;
@@ -66,6 +65,7 @@ c_rgb *complemento(const c_rgb *original ,uChar estilo){
                             compl->rgb[i] = 0xff;
                         else
                             compl->rgb[i] = temp->rgb[i] + inver->rgb[i];}}}
+
             liberar(temp);
             liberar(inver);
             compl->rgb[_F_] = C_AMARILLO;

@@ -1,71 +1,6 @@
-#include "kartacoor.h"
-#include "kartamath.h"
-#include <QPointF>
-//#include <QMouseEvent>
-#include <assert.h>
-#include <math.h>
-//#include <QWidget>
-
-#define rad(ang) (ang * (M_PI/180))
-
-QPointF coordenadasCirculares(const QPointF &CENTRO, cFloat &RADIO, cFloat &NumDeSecciones, cFloat &index, Karta::Sentido sentido){
-    if(NumDeSecciones <= 0|| RADIO <= 0 || index < 0 || index > NumDeSecciones) return CENTRO;
-
-    double x = 0;
-    double y = 0;
-    cDouble UNIDAD = 360/NumDeSecciones;
-
-    switch (sentido) {
-    case Karta::Horario:
-        y = 90 -((UNIDAD * index) + UNIDAD);
-        x = 90 - fabs(y);
-        break;
-    case Karta::Anti_horario:
-        x = 90 -((UNIDAD * index) + UNIDAD);
-        y = 90 - fabs(x);
-        break;
-    case Karta::Radial:
-        x = 90 -(UNIDAD * index);
-        y = 90 - fabs(x);
-        break;
-    default: return CENTRO;}
-
-    double punto_coor_x = sin(rad(x)) * RADIO;
-    double punto_coor_y = sin(rad(y)) * RADIO;
-
-    return QPointF((CENTRO.x() + punto_coor_x),(CENTRO.y() - punto_coor_y));}
-
-
-
-
-/***********************************************************************************************/
-
-
-QPointF rotarCoordenada(const QPointF &ancla, const QPointF &coor, cDouble &ang, const bool &anti_radial){
-    if(ancla == coor || !ANGULO_VALIDO(ang)) return coor;
-    return rotarCoordenada(ancla.x(),ancla.y(),coor.x(), coor.y(),ang, anti_radial);}
-
-QPointF rotarCoordenada(const QPoint &ancla, const QPoint &coor, cDouble &ang, const bool &anti_radial){
-    if (ancla == coor || !ANGULO_VALIDO(ang)) return coor;
-    return rotarCoordenada(ancla.x(),ancla.y(),coor.x(), coor.y(),ang, anti_radial);}
-
-QPointF rotarCoordenada(cDouble &ancla_x, cDouble &ancla_y, cDouble &coor_x, cDouble &coor_y, cDouble &ang, const bool &anti_radial){
-    assert(ang < 360 && ang >  0);
-    double longitud = longitud_de_la_recta(ancla_x,ancla_y,coor_x,coor_y);
-    double angulo = angulo_de_la_coordenada(ancla_x,ancla_y,coor_x,coor_y) + (!anti_radial ? ang : 360 - ang);
-    double x = 90 - (angulo > 360 ? angulo - 360 : angulo);
-    double y = 90 - fabs(x);
-
-    double punto_x = sin(rad(x)) * longitud;
-    double punto_y = sin(rad(y)) * longitud;
-    return QPointF((ancla_x + punto_x), (ancla_y - punto_y));}
-
-
-
-/***********************************************************************************************/
-
-
-/*
+#include "kcelda.h"
+#include <QMouseEvent>
+#include <QWidget>
 
 kcelda::kcelda(const QSize &tamanyo, const Karta::Modo &Modo){
     __cargarDatos();
@@ -93,9 +28,8 @@ void kcelda::__cargarDatos(){
     frame = QSize(0,0);
     cursor_desplazado = new QPoint;
     cursor_click = new QPoint;
-    margenH_der = margenH_izq = moverEnH =
-    margenV_sup = margenV_inf = moverEnV =
-    scroll_h = scroll_v = 0;
+    margenH_der = margenV_sup = moverEnH = scroll_h = 0;
+    margenH_izq = margenV_inf = moverEnV = scroll_v = 0;
     indices.data = KARTA_ERROR;
     mov_h = mov_v = true;}
 
@@ -236,4 +170,3 @@ QRect kcelda::qrect(cuShort &idx_h, cuShort &idx_v){
     if(size.height() <= 0 || size.width() <= 0) return QRect(0,0,0,0);
 
     return QRect(coor,size);}
-*/

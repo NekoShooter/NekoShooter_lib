@@ -15,9 +15,9 @@ extern "C"
 #define _B_ 0
 
 union c_rgb {
-    unsigned int id : 24;
-    unsigned int id_a: 32;
     unsigned long long info:40;
+    unsigned int id_a: 32;
+    unsigned int id : 24;
     unsigned char rgb[5];} __attribute__((packed));
 
 typedef union c_rgb c_rgb;

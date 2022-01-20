@@ -20,11 +20,13 @@ INCLUDEPATH += Colori \ Giti \ Karta \ Ansky \
     Colori/ColoriColor \
     Giti/GitiCore \
     Karta/KartaCore \
+    Karta/KartaMecanismo \
     Ansky/AnskyCore \
     Ansky/AnskyTrazo
 
 
 SOURCES += \
+    Ansky/AnskyCore/AnskyEsenciales.cpp \
     Ansky/AnskyCore/anskybasic.cpp \
     Ansky/AnskyCore/anskymath.cpp \
     Ansky/AnskyTrazo/anskytrazo.cpp \
@@ -36,8 +38,10 @@ SOURCES += \
     Giti/GitiCore/GitiBits.c \
     Karta/KartaCore/kartacoor.cpp \
     Karta/KartaCore/kartamath.cpp \
+    Karta/KartaMecanismo/kcelda.cpp
 
 HEADERS += \
+    Ansky/AnskyCore/AnskyEsenciales.h \
     Ansky/AnskyCore/anskybasic.h \
     Ansky/AnskyCore/anskymath.h \
     Ansky/AnskyTrazo/anskytrazo.h \
@@ -51,7 +55,8 @@ HEADERS += \
     Giti/GitiCore/__GITICONST__.h \
     Karta/KartaCore/__KARTACONST__.h \
     Karta/KartaCore/kartacoor.h \
-    Karta/KartaCore/kartamath.h
+    Karta/KartaCore/kartamath.h \
+    Karta/KartaMecanismo/kcelda.h
 
 # Default rules for deployment.
 unix {
