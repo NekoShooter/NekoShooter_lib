@@ -109,20 +109,24 @@ c_rgb nivelacion_luminica(const c_rgb *ColorOriginal,const c_rgb *ColorBase){
 
 
 c_rgb nivel_de_luminicencia(c_rgb Color,short intencidad){
+    autoIncrementarLuminicencia(&Color,intencidad);
+    return Color;}
+
+/**/
+
+
+void autoIncrementarLuminicencia(c_rgb *Color,short intencidad){
     unsigned char i = 0;
 
     for(;i < 3; ++i){
 
-        if (Color.rgb[i] + intencidad < 0)
-            Color.rgb[i] = 0;
-        else if (Color.rgb[i] + intencidad > 0xff)
-            Color.rgb[i] = 0xff;
+        if (Color->rgb[i] + intencidad < 0)
+            Color->rgb[i] = 0;
+        else if (Color->rgb[i] + intencidad > 0xff)
+            Color->rgb[i] = 0xff;
         else
-            Color.rgb[i] = Color.rgb[i] + intencidad;}
-
-    return Color;}
-
-
+            Color->rgb[i] = Color->rgb[i] + intencidad;}
+}
 /********************************************/
 
 

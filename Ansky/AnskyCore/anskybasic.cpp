@@ -1,5 +1,5 @@
-#include "anskybasic.h"
-#include "anskytrazo.h"
+#include "AnskyBasic.h"
+#include "AnskyTrazado.h"
 #include <QPainter>
 #include <QRect>
 #include <QPoint>

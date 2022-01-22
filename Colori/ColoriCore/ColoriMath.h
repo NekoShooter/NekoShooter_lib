@@ -13,6 +13,7 @@ short brillo_y_sombra(const c_rgb *color,c_rgb *Brillo, c_rgb *Sombra, double Ni
 
 c_rgb * suma_de_color(const c_rgb * origen, const c_rgb * destino, short desplazamiento);
 
+void autoIncrementarLuminicencia(c_rgb *Color,short intencidad);
 c_rgb nivel_de_luminicencia(c_rgb Color,short intencidad);
 c_rgb nivelacion_luminica(const c_rgb * ColorA,const c_rgb * ColorB);
 

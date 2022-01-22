@@ -1,4 +1,4 @@
-#include "anskymath.h"
+#include "AnskyMath.h"
 #include "kartacoor.h"
 
 QList<QPointF> Generar_triangulo(const QPointF &posicion,cDouble &base, cDouble &altura){

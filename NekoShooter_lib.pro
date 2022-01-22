@@ -30,14 +30,19 @@ SOURCES += \
     Ansky/AnskyCore/anskybasic.cpp \
     Ansky/AnskyCore/anskymath.cpp \
     Ansky/AnskyTrazo/anskytrazo.cpp \
+    Ansky/AnskyUtiles/AnskyBG.cpp \
+    Ansky/AnskyUtiles/AnskyShorts.cpp \
+    Ansky/AnskyUtiles/AnskyTrazado.cpp \
     Colori/ColoriCore/ColoriBasic.c \
     Colori/ColoriColor/ColoriColor.cpp \
     Colori/ColoriCore/ColoriMath.c \
     Colori/ColoriColor/ColoriRGB.cpp \
     Colori/ColoriCore/Colori__rgb__.c \
+    Colori/ColoriUtiles/ColoriUtiles.c \
     Giti/GitiCore/GitiBits.c \
     Karta/KartaCore/kartacoor.cpp \
     Karta/KartaCore/kartamath.cpp \
+    Karta/KartaMecanismo/KSonda.cpp \
     Karta/KartaMecanismo/kcelda.cpp
 
 HEADERS += \
@@ -45,17 +50,22 @@ HEADERS += \
     Ansky/AnskyCore/anskybasic.h \
     Ansky/AnskyCore/anskymath.h \
     Ansky/AnskyTrazo/anskytrazo.h \
+    Ansky/AnskyUtiles/AnskyBG.h \
+    Ansky/AnskyUtiles/AnskyShorts.h \
+    Ansky/AnskyUtiles/AnskyTrazado.h \
     Colori/ColoriCore/ColoriBasic.h \
     Colori/ColoriColor/ColoriColor.h \
     Colori/ColoriCore/ColoriMath.h \
     Colori/ColoriColor/ColoriRGB.h \
     Colori/ColoriCore/Colori__rgb__.h \
     Colori/ColoriCore/__COLORICONST__.h \
+    Colori/ColoriUtiles/ColoriUtiles.h \
     Giti/GitiCore/GitiBits.h \
     Giti/GitiCore/__GITICONST__.h \
     Karta/KartaCore/__KARTACONST__.h \
     Karta/KartaCore/kartacoor.h \
     Karta/KartaCore/kartamath.h \
+    Karta/KartaMecanismo/KSonda.h \
     Karta/KartaMecanismo/kcelda.h
 
 # Default rules for deployment.
