@@ -107,7 +107,7 @@ void KTimon::CambiarTamBase(const QSize &tam){
 void KTimon::CambiarQMatrix(const QMatrix &matrix){
     if(!__qmatrix) __NuevoQMatrix();
     *__qmatrix = matrix;
-    *__qmatrixTemp = matrix;}
+    *__qmatrixRes = matrix;}
 
 
 void KTimon::AdoptarQMatrix(QMatrix *&matrix){
@@ -115,14 +115,14 @@ void KTimon::AdoptarQMatrix(QMatrix *&matrix){
     if(__qmatrix && &(*__qmatrix) == &(*matrix)) return;
     __BorrarQMatrix();
     __qmatrix = matrix;
-    *__qmatrixTemp = *__qmatrix;}
+    *__qmatrixRes = *__qmatrix;}
 
 
 void KTimon::ReIniciar(){
-    __movX = __movXAncla = 0;
-    __movY = __movYAncla = 0;
-    __zoom = __zoomAncla = 0;
+    __movX   = __movXAncla   = 0;
+    __movY   = __movYAncla   = 0;
     __grados = __gradosAncla = 0;
+    __zoom   = __zoomAncla   = 1;
     Actualizar();}
 
 
@@ -131,42 +131,37 @@ void KTimon::ReIniciarRotacion(){
 
 void KTimon::ReIniciarNevegacion(){
     __movX = __movXAncla = 0;
-    __movY = __movYAncla = 0;    Actualizar();}
+    __movY = __movYAncla = 0;   Actualizar();}
 
 void KTimon::ReIniciarZoom(){
-    __zoom = __zoomAncla = 0;   Actualizar();}
+    __zoom = __zoomAncla = 1;   Actualizar();}
 
 
 
 void KTimon::Actualizar(){
-    if(!__qmatrix ||!__tamBase || !__tam || !__posicion ) {
-        __estaVacio = true;
-        return;}
+    if(!__qmatrix ||!__tamBase || !__tam || !__posicion ) return;
 
-    QMatrix *m = __qmatrixTemp;
-    QMatrix zoom(m->m11() + __zoom, m->m12(), m->m21(), m->m11() + __zoom, m->dx() , m->dy());
-
+    QMatrix zoom(__zoom,0,0,__zoom,0,0);
 
     if(__grados){
         const double rad =  (M_PI/180) * __grados;
         const double seno = sin(rad);
         const double cose = cos(rad);
         QMatrix girar(cose,seno,-seno,cose,0,0);
-        *__qmatrix = zoom * girar;}
+        *__qmatrix = *__qmatrixRes * zoom * girar;}
 
-    else *__qmatrix = zoom;
+    else
+        *__qmatrix = *__qmatrixRes * zoom;
 
     QPointF medio = ReCentro(*__tam,*__tamBase, *__qmatrix);
 
-    __qmatrix->translate(medio.x()+__movX + __posicion->x(),medio.y()+__movY + __posicion->y());
-    __estaVacio = false;}
+    __qmatrix->translate(medio.x()+__movX + __posicion->x(),medio.y()+__movY + __posicion->y());}
 
 
 
 void KTimon::Zoom(cDouble &zoom){
-    if(!__qmatrix || __qmatrixTemp->m11() + __zoomAncla + zoom <= 0 ||__qmatrixTemp->m22() + __zoomAncla + zoom <= 0 )
-        return;
-    __zoom = __zoomAncla + zoom;}
+    if( __zoomAncla * zoom > .1 )
+        __zoom = __zoomAncla * zoom;}
 
 
 void KTimon::Rotar(cDouble &grados){
@@ -183,8 +178,9 @@ void KTimon::Mover(cDouble &moverEnX,cDouble &moverEnY){
 
 
 void KTimon::Navegar(cDouble &moverEnX, cDouble &moverEnY, cDouble &zoom, cDouble &grados){
-    __movX = moverEnX;  Zoom(zoom);
-    __movY = moverEnY;  Rotar(grados);}
+    MoverEnX(moverEnX);  Zoom(zoom);
+    MoverEnY(moverEnY);  Rotar(grados);}
+
 
 void KTimon::mousePressEvent(QMouseEvent *event, const bool &rotacionActiva){
     if(!event) return;
@@ -193,15 +189,18 @@ void KTimon::mousePressEvent(QMouseEvent *event, const bool &rotacionActiva){
     if(rotacionActiva && __tamBase)
         __angInicial = angulo_de_la_coordenada(QPoint(__tamBase->width()/2,__tamBase->height()/2),event->pos());}
 
+
 void KTimon::mouseMoveEventZoom(QMouseEvent *event, cDouble &distanciaFocal){
     if(!event || !__puntoAncla || distanciaFocal <= 0) return;
-    int movimientoVertical = __puntoAncla->y() - event->pos().y();
-    Zoom(movimientoVertical * distanciaFocal);}
+    double zoom = (__puntoAncla->y() - event->pos().y()) * distanciaFocal;
+    Zoom(exp(zoom));}
+
 
 void KTimon::mouseMoveEventRotar(QMouseEvent *event){
     if(!__tamBase) return;
     double ang = angulo_de_la_coordenada(QPoint(__tamBase->width()/2,__tamBase->height()/2),event->pos());
     Rotar(diferencia_angular(__angInicial,ang));}
+
 
 void KTimon::mouseMoveEventMover(QMouseEvent *event){
     if(!event || !__puntoAncla ) return;
@@ -219,15 +218,14 @@ void KTimon::Anclar(){
 void KTimon::__Inicializar(){
     __qmatrix = nullptr;
     __qmatrix_autogenerada = nullptr;
-    __qmatrixTemp = new QMatrix(1,0,0,1,0,0);
+    __qmatrixRes = new QMatrix(1,0,0,1,0,0);
     __tam = nullptr;
     __tamBase = nullptr;
     __posicion = nullptr;
     __puntoAncla = nullptr;
-    __estaVacio = true;
     __movX = __movXAncla = 0;
     __movY = __movYAncla = 0;
-    __zoom = __zoomAncla = 0;
+    __zoom = __zoomAncla = 1;
     __grados = __gradosAncla = 0;}
 
 
@@ -246,7 +244,7 @@ void KTimon::__BorrarQMatrix(){
 
 KTimon::~KTimon(){
     __BorrarQMatrix();
-    delete __qmatrixTemp;
+    delete __qmatrixRes;
     if(__posicion)     delete __posicion;
     if(__tam)          delete __tam;
     if(__tamBase)      delete __tamBase;

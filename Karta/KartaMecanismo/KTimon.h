@@ -1,11 +1,12 @@
 #ifndef __KTimon
 #define __KTimon
 #include "__GITICONST__.h"
+#include <QPoint>
 
 class QMatrix;
 class QSize;
 class QWidget;
-class QPoint;
+//class QPoint;
 class QPointF;
 class QImage;
 class QRect;
@@ -78,17 +79,15 @@ public:
     inline bool EsQMatrixPropio() const {return  !__qmatrix_autogenerada;}
 
 private:
-    bool      __estaVacio;
-
     QMatrix * __qmatrix,
             * __qmatrix_autogenerada,
-            * __qmatrixTemp;
+            * __qmatrixRes;
 
     QSize   * __tam,
             * __tamBase;
 
     QPointF * __posicion;
-    QPoint  * __puntoAncla;
+    QPoint  * __puntoAncla, __puntoFinal;
 
     double   __movX,   __movXAncla,
              __movY,   __movYAncla,

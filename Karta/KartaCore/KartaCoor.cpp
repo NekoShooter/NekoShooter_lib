@@ -130,3 +130,15 @@ QPointF ReCentro(const QSize &timg, const QSize &twid, const QMatrix &m){
     QPointF centroWidget = ReCalcularCoordenada(QPoint(twid.width()/2, twid.height()/2),m);
     QPointF centroImagen = QPointF((timg.width()/2)+m.dx(),(timg.height()/2)+m.dy());
     return QPointF(centroWidget-centroImagen);}
+
+
+QMatrix Rotacion(const QPointF &ancla, const QPointF &partida,const QPointF &destino){
+    //fallida
+    QPointF ini = partida - ancla;
+    QPointF fin = destino - ancla;
+    double inicio = sqrt( ini.x() * ini.x() + ini.y() * ini.y());
+    double final  = sqrt( fin.x() * fin.x() + fin.y() * fin.y());
+
+    double cose =  (ini.x() * fin.x() + ini.y() * fin.y()) / inicio * final;
+    double seno = (-ini.x() * fin.y() + ini.y() * fin.x()) / inicio * final;
+    return QMatrix(cose,-seno,seno,cose,0,0);}

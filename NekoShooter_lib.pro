@@ -22,6 +22,7 @@ INCLUDEPATH += Colori \ Giti \ Karta \ Ansky \
     Giti/GitiCore \
     Karta/KartaCore \
     Karta/KartaMecanismo \
+    Karta/KartaUtiles \
     Ansky/AnskyCore \
     Ansky/AnskyUtiles
 
@@ -29,8 +30,7 @@ INCLUDEPATH += Colori \ Giti \ Karta \ Ansky \
 SOURCES += \
     Ansky/AnskyCore/AnskyBasic.cpp \
     Ansky/AnskyCore/AnskyEsenciales.cpp \
-    Ansky/AnskyCore/anskymath.cpp \
-    Ansky/AnskyTrazo/anskytrazo.cpp \
+    Ansky/AnskyCore/AnskyMath.cpp \
     Ansky/AnskyUtiles/AnskyBG.cpp \
     Ansky/AnskyUtiles/AnskyShorts.cpp \
     Ansky/AnskyUtiles/AnskyTrazado.cpp \
@@ -42,17 +42,18 @@ SOURCES += \
     Colori/ColoriUtiles/ColoriUtiles.c \
     Giti/GitiCore/GitiBits.c \
     Karta/KartaCore/KartaCoor.cpp \
+    Karta/KartaCore/KartaEsencial.cpp \
     Karta/KartaCore/KartaMath.cpp \
     Karta/KartaMecanismo/KSonda.cpp \
     Karta/KartaMecanismo/KCelda.cpp \
-    Karta/KartaMecanismo/KTimon.cpp
+    Karta/KartaMecanismo/KTimon.cpp \
+    Karta/KartaUtiles/KArea.cpp
 
 HEADERS += \
     Ansky/AnskyCore/AnskyBasic.h \
     Ansky/AnskyCore/AnskyEsenciales.h \
     Ansky/AnskyCore/AnskyMath.h \
     Ansky/AnskyCore/__ANSKYCONST__.h \
-    Ansky/AnskyTrazo/anskytrazo.h \
     Ansky/AnskyUtiles/AnskyBG.h \
     Ansky/AnskyUtiles/AnskyShorts.h \
     Ansky/AnskyUtiles/AnskyTrazado.h \
@@ -66,11 +67,13 @@ HEADERS += \
     Giti/GitiCore/GitiBits.h \
     Giti/GitiCore/__GITICONST__.h \
     Karta/KartaCore/KartaCoor.h \
+    Karta/KartaCore/KartaEsencial.h \
     Karta/KartaCore/KartaMath.h \
     Karta/KartaCore/__KARTACONST__.h \
     Karta/KartaMecanismo/KSonda.h \
     Karta/KartaMecanismo/KCelda.h \
-    Karta/KartaMecanismo/KTimon.h
+    Karta/KartaMecanismo/KTimon.h \
+    Karta/KartaUtiles/KArea.h
 
 # Default rules for deployment.
 unix {

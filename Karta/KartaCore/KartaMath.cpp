@@ -66,8 +66,6 @@ double angulo_de_la_coordenada(cDouble &Ref_x, cDouble &Ref_y, cDouble &coor_x,c
 
     return adyasente_de_la_recta(Ref_x,Ref_y,coor_x,coor_y);}
 
-
-
 /********************************************************************************/
 
 

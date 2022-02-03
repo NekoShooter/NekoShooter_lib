@@ -29,4 +29,6 @@ QPointF ReCalcularCoordenada(const QPoint &coordenada, const QMatrix &matriz);
 QPointF ReCentro(const QSize &timg, const QSize &twid, const QMatrix &m);
 /***********************************************************************************************/
 
+QMatrix Rotacion(const QPointF &ancla, const QPointF &partida, const QPointF &destino);
+
 #endif // __KartaCoor
