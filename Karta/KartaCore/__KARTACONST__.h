@@ -1,5 +1,5 @@
-#ifndef __KARTACONST___H
-#define __KARTACONST___H
+#ifndef __KARTACONST__
+#define __KARTACONST__
 
 #define KARTA_ERROR -1
 #define ANGULO_VALIDO(ang) (ang > 0 && 360 > ang)
@@ -12,4 +12,4 @@ typedef enum Modo { Absoluto, Relativo ,Global, Exclusivo}Modo;
 typedef enum orientacion{Horizontal, Vertical, Libre}orientacion;
 
 }
-#endif // __KARTACONST___H
+#endif // __KARTACONST__

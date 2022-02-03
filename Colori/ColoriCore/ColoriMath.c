@@ -1,5 +1,6 @@
 #include "ColoriMath.h"
 #include "GitiBits.h"
+#include <math.h>
 
 short dividir_tono(short Tono, short *Claro, short *Oscuro,double Nivel_Brillo, double Nivel_Oscuro){
     if(Tono < NEGRO || Claro == Nulo || Oscuro == Nulo|| Nivel_Brillo < 0x0 || Nivel_Oscuro < 0x0)
@@ -114,19 +115,20 @@ c_rgb nivel_de_luminicencia(c_rgb Color,short intencidad){
 
 /**/
 
-
 void autoIncrementarLuminicencia(c_rgb *Color,short intencidad){
     unsigned char i = 0;
+    for(;i < 3; ++i) incrementarTonoLuminico(&Color->rgb[i],intencidad,0xff,0);}
 
-    for(;i < 3; ++i){
+/**/
 
-        if (Color->rgb[i] + intencidad < 0)
-            Color->rgb[i] = 0;
-        else if (Color->rgb[i] + intencidad > 0xff)
-            Color->rgb[i] = 0xff;
-        else
-            Color->rgb[i] = Color->rgb[i] + intencidad;}
-}
+void incrementarTonoLuminico(uChar *tono, short intencidad, uChar lim_max, uChar lim_min){
+    if (*tono + intencidad < lim_min)
+        *tono = lim_min;
+    else if (*tono + intencidad > lim_max)
+        *tono = lim_max;
+    else
+        *tono = *tono + intencidad;}
+
 /********************************************/
 
 
@@ -363,3 +365,16 @@ coloriFamilia purezaRGB(const c_rgb *original){
     if(original->rgb[idx_med] <= porcentaje * 30 && original->rgb[idx_min] <= porcentaje * 30)
         return familia;
     return C_NONE;}
+
+
+double umbral_RGBAi(uInt base, uInt comp){
+    c_rgb _base = {base};
+    c_rgb _comp = {comp};
+    return umbral_RGBAc(&_base,&_comp);}
+
+
+double umbral_RGBAc(const c_rgb *base, const c_rgb *comp){
+    return  (sqrt(base->rgb[_R_] - comp->rgb[_R_]) +
+             sqrt(base->rgb[_G_] - comp->rgb[_G_]) +
+             sqrt(base->rgb[_B_] - comp->rgb[_B_]) +
+             sqrt(base->rgb[_A_] - comp->rgb[_A_]));}

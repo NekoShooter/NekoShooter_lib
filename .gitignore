@@ -1,4 +1,5 @@
 test/
 build-text-Desktop_Qt_5_9_9_MinGW_32bit-Debug/
 build-text-Desktop_Qt_5_9_9_MinGW_32bit-Release/
+build-NekoShooter_lib-Desktop_Qt_5_9_9_MinGW_32bit-Debug/
 *.autosave

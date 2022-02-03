@@ -18,16 +18,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += Colori \ Giti \ Karta \ Ansky \
     Colori/ColoriCore \
     Colori/ColoriColor \
+    Colori/ColoriUtiles \
     Giti/GitiCore \
     Karta/KartaCore \
     Karta/KartaMecanismo \
     Ansky/AnskyCore \
-    Ansky/AnskyTrazo
+    Ansky/AnskyUtiles
 
 
 SOURCES += \
+    Ansky/AnskyCore/AnskyBasic.cpp \
     Ansky/AnskyCore/AnskyEsenciales.cpp \
-    Ansky/AnskyCore/anskybasic.cpp \
     Ansky/AnskyCore/anskymath.cpp \
     Ansky/AnskyTrazo/anskytrazo.cpp \
     Ansky/AnskyUtiles/AnskyBG.cpp \
@@ -40,15 +41,17 @@ SOURCES += \
     Colori/ColoriCore/Colori__rgb__.c \
     Colori/ColoriUtiles/ColoriUtiles.c \
     Giti/GitiCore/GitiBits.c \
-    Karta/KartaCore/kartacoor.cpp \
-    Karta/KartaCore/kartamath.cpp \
+    Karta/KartaCore/KartaCoor.cpp \
+    Karta/KartaCore/KartaMath.cpp \
     Karta/KartaMecanismo/KSonda.cpp \
-    Karta/KartaMecanismo/kcelda.cpp
+    Karta/KartaMecanismo/KCelda.cpp \
+    Karta/KartaMecanismo/KTimon.cpp
 
 HEADERS += \
+    Ansky/AnskyCore/AnskyBasic.h \
     Ansky/AnskyCore/AnskyEsenciales.h \
-    Ansky/AnskyCore/anskybasic.h \
-    Ansky/AnskyCore/anskymath.h \
+    Ansky/AnskyCore/AnskyMath.h \
+    Ansky/AnskyCore/__ANSKYCONST__.h \
     Ansky/AnskyTrazo/anskytrazo.h \
     Ansky/AnskyUtiles/AnskyBG.h \
     Ansky/AnskyUtiles/AnskyShorts.h \
@@ -62,11 +65,12 @@ HEADERS += \
     Colori/ColoriUtiles/ColoriUtiles.h \
     Giti/GitiCore/GitiBits.h \
     Giti/GitiCore/__GITICONST__.h \
+    Karta/KartaCore/KartaCoor.h \
+    Karta/KartaCore/KartaMath.h \
     Karta/KartaCore/__KARTACONST__.h \
-    Karta/KartaCore/kartacoor.h \
-    Karta/KartaCore/kartamath.h \
     Karta/KartaMecanismo/KSonda.h \
-    Karta/KartaMecanismo/kcelda.h
+    Karta/KartaMecanismo/KCelda.h \
+    Karta/KartaMecanismo/KTimon.h
 
 # Default rules for deployment.
 unix {

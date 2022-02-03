@@ -1,7 +1,6 @@
 #include "Colori__rgb__.h"
 #include "ColoriMath.h"
 #include <stdlib.h>
-//#include <stdio.h>
 
 
 c_rgb *nuevo_rgb(short tam){

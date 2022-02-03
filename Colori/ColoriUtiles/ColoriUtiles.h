@@ -1,7 +1,6 @@
-#ifndef COLORIUTILES_H
-#define COLORIUTILES_H
+#ifndef __ColoriUtiles
+#define __ColoriUtiles
 #include "__GITICONST__.h"
-#define NEKO 25
 
 #ifdef __cplusplus
 extern "C"
@@ -13,8 +12,10 @@ BOOL Similaridad(cuInt ColorBase, cuInt ColorComparado, cuChar tolerancia);
 BOOL Similaridad2(cuInt ColorBase, cuInt ColorComparado, cuChar tolerancia);
 BOOL SimilaridadPorTolerancia(cuInt ColorBase, cuInt ColorComparado, cuChar tolerancia);
 
+void RangoDeSimilaridad(cuInt original, uInt *max, uInt *min, cuChar umbral);
+
 
 #ifdef __cplusplus
 }
 #endif
-#endif // COLORIUTILES_H
+#endif // __ColoriUtiles

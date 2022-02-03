@@ -16,12 +16,16 @@ c_rgb * suma_de_color(const c_rgb * origen, const c_rgb * destino, short desplaz
 void autoIncrementarLuminicencia(c_rgb *Color,short intencidad);
 c_rgb nivel_de_luminicencia(c_rgb Color,short intencidad);
 c_rgb nivelacion_luminica(const c_rgb * ColorA,const c_rgb * ColorB);
+void incrementarTonoLuminico(uChar *tono, short intencidad, uChar lim_max, uChar lim_min);
 
 void mover_rgb(c_rgb *crgb, uChar tipo_de_movimiento);
 void convertir_a_inverso(c_rgb *original);
 c_rgb *inverso(const c_rgb *original);
 c_rgb *tercio(const c_rgb *original,uChar orientacion);
 c_rgb *sexto(const c_rgb *original,uChar orientacion);
+
+double umbral_RGBAc(const c_rgb *base, const c_rgb *comp);
+double umbral_RGBAi(uInt base, uInt comp);
 
 
 void buscar_familia(c_rgb *_rgb_);

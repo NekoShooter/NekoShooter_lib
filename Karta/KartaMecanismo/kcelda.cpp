@@ -1,29 +1,30 @@
-#include "kcelda.h"
+#include "KCelda.h"
 #include <QMouseEvent>
 #include <QWidget>
 
-kcelda::kcelda(const QSize &tamanyo, const Karta::Modo &Modo){
+KCelda::KCelda(const QSize &tamanyo, const Karta::Modo &Modo){
     __cargarDatos();
     recargar(tamanyo,nullptr,Modo);}
 
-kcelda::kcelda(const QWidget *WIDGET) : widget(WIDGET){
-    __cargarDatos();}
+KCelda::KCelda(const QWidget *WIDGET){
+    __cargarDatos();
+    widget = WIDGET;}
 
-kcelda::kcelda(const QSize &tamanyo, const QWidget *WIDGET){
+KCelda::KCelda(const QSize &tamanyo, const QWidget *WIDGET){
     __cargarDatos();
     recargar(tamanyo,WIDGET);}
 
-kcelda::kcelda(const QSize &tamanyo, const QWidget *WIDGET, const Karta::Modo &Modo){
+KCelda::KCelda(const QSize &tamanyo, const QWidget *WIDGET, const Karta::Modo &Modo){
     __cargarDatos();
     recargar(tamanyo,WIDGET,Modo);}
 
-void kcelda::recargar(const QSize &tamanyo, const QWidget *WIDGET, const Karta::Modo &Modo){
+void KCelda::recargar(const QSize &tamanyo, const QWidget *WIDGET, const Karta::Modo &Modo){
     if(tamanyo.isEmpty()) return;
     *Tam = tamanyo;
     widget = WIDGET;
     modo = Modo;}
 
-void kcelda::__cargarDatos(){
+void KCelda::__cargarDatos(){
     Tam = new QSize;
     frame = QSize(0,0);
     cursor_desplazado = new QPoint;
@@ -31,20 +32,21 @@ void kcelda::__cargarDatos(){
     margenH_der = margenV_sup = moverEnH = scroll_h = 0;
     margenH_izq = margenV_inf = moverEnV = scroll_v = 0;
     indices.data = KARTA_ERROR;
-    mov_h = mov_v = true;}
+    mov_h = mov_v = true;
+    widget = nullptr;}
 
-kcelda::~kcelda(){
+KCelda::~KCelda(){
     if(Tam)   delete Tam;
     delete cursor_desplazado;
     delete cursor_click;}
 
-void kcelda::cambiarTam(const QSize &tamanyo){
+void KCelda::cambiarTam(const QSize &tamanyo){
     if(tamanyo.isEmpty()) return;
     *Tam = tamanyo;}
 
-bool kcelda::esValido() const{return !(!Tam || Tam->isEmpty());}
+bool KCelda::esValido() const{return !(!Tam || Tam->isEmpty());}
 
-void kcelda::limpiar(){
+void KCelda::limpiar(){
     if(Tam)delete Tam;
     Tam = nullptr;
     margenH_der = margenH_izq = margenV_sup = margenV_inf = 0;
@@ -52,14 +54,14 @@ void kcelda::limpiar(){
 
 
 
-void kcelda::BorrarRecuadro(){
+void KCelda::BorrarRecuadro(){
     frame.setWidth(0);
     frame.setHeight(0);
     moverEnH = moverEnV = 0;}
 
 
 
-void kcelda::restringirMov(const Karta::orientacion &mov){
+void KCelda::restringirMov(const Karta::orientacion &mov){
     switch (mov) {
     case Karta::Horizontal:
         mov_v = false;
@@ -75,21 +77,21 @@ void kcelda::restringirMov(const Karta::orientacion &mov){
 
 
 
-void kcelda::Recuadro(const QSize &recuadro_interno, const Qt::Alignment &Alineacion){
+void KCelda::Recuadro(const QSize &recuadro_interno, const Qt::Alignment &Alineacion){
     if(recuadro_interno.isEmpty() || (Tam->height() < recuadro_interno.height() || Tam->width() < recuadro_interno.width()))
         return;
     frame = recuadro_interno;
     alineacion = Alineacion;}
 
-void kcelda::mouseMoveEvent(QMouseEvent *event){
+void KCelda::mouseMoveEvent(QMouseEvent *event){
     if(!event) return;
     *cursor_desplazado = event->pos();}
 
-const k_index &kcelda::mousePressEvent(QMouseEvent *event){
+const k_index &KCelda::mousePressEvent(QMouseEvent *event){
     if(event) *cursor_click = event->pos();
     return mousePos(event);}
 
-const k_index &kcelda::mousePos(QMouseEvent *event){
+const k_index &KCelda::mousePos(QMouseEvent *event){
     indices.data = KARTA_ERROR;
     if(event){
         if(widget && ((event->pos().rx() >= widget->size().rwidth() - margenH_der) ||
@@ -104,7 +106,7 @@ const k_index &kcelda::mousePos(QMouseEvent *event){
 
 
 
-QRect kcelda::qrect(cuShort &idx_h, cuShort &idx_v){
+QRect KCelda::qrect(cuShort &idx_h, cuShort &idx_v){
     if(!esValido()) return QRect(0,0,0,0);
     QSize size = *Tam;
     if(modo == Karta::Relativo){

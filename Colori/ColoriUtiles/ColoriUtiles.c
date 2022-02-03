@@ -25,7 +25,7 @@ BOOL Similaridad2(cuInt ColorBase, cuInt ColorComparado, cuChar tolerancia){
     short i = _B_;
     if(b.id == c.id) return True;;
     while(i < _A_){
-        char max, min;
+        unsigned char max, min;
         definir_limite_ascendente(b.rgb[(short)i],&max,&min);
         if(c.rgb[(short)i] < max && c.rgb[(short)i] > min) ++i;
         else return False;}
@@ -39,3 +39,12 @@ BOOL SimilaridadPorTolerancia(cuInt ColorBase, cuInt ColorComparado, cuChar tole
     double T = 0;
     for(char i = _B_; i != _F_; ++i) T += sqrt(b.rgb[(short)i] - c.rgb[(short)i]);
     return T <= tolerancia;}
+
+
+void RangoDeSimilaridad(cuInt original, uInt *max, uInt *min, cuChar umbral){
+    c_rgb Max = {original};
+    c_rgb Min = {original};
+    autoIncrementarLuminicencia(&Max, umbral);
+    autoIncrementarLuminicencia(&Min, -umbral);
+    *max = Max.id_a;
+    *min = Min.id_a;}

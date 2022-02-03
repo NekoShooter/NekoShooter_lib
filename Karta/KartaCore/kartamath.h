@@ -1,6 +1,6 @@
-#ifndef KARTAMATH_H
-#define KARTAMATH_H
-#include "kartacoor.h"
+#ifndef __KartaMath
+#define __KartaMath
+#include "KartaCoor.h"
 
 //class QPointF;
 
@@ -17,4 +17,5 @@ double angulo_de_la_coordenada(const QPoint &referencia,const QPoint &coor);
 double angulo_de_la_coordenada(cDouble &Ref_x, cDouble &Ref_y, cDouble &coor_x,cDouble &coor_y);
 
 double diferencia_angular(cDouble &anguloInicial, cDouble &anguloFinal);
-#endif // KARTAMATH_H
+double adicion_angular(cDouble &anguloInicial, cDouble &anguloFinal);
+#endif // __KartaMath

@@ -1,15 +1,9 @@
-#ifndef ANSKYESENCIALES_H
-#define ANSKYESENCIALES_H
+#ifndef __AnskyEsenciales
+#define __AnskyEsenciales
 #include <QList>
 #include "__GITICONST__.h"
 
-class KSonda;
+void AgregarPixel(QImage *img, QImage *capa, cuInt &nuevocolor, cuInt &Rmax, cuInt &Rmin, cuInt &x, cuInt &y, QList<QPoint> &lista, bool &condicion);
+bool ColoreadoLineal(QImage *img, QImage * capa, cuInt &nuevocolor, cuInt &Rmax, cuInt &Rmin, const QPoint &punto_de_partida, QList<QPoint> &lista, bool mod_inverso = false, bool limitar = false);
 
-
-void AgregarPixel(const QImage &img, cuInt &id_color_del_pixel, cuInt &x, cuInt &y, QList<QPoint> &lista, bool &condicion);
-bool ColoreadoLineal(QImage &img, cuInt &id_color_del_pixel, const QPoint& punto_de_partida, QList<QPoint> &lista, cuInt &id_nuevo_color, bool mod_inverso = false, QImage * capa = nullptr);
-
-void AgregarPixel2(const QImage &img, KSonda * mapa, cuInt &colorMax, cuInt &colorMin, cuInt &x, cuInt &y, QList<QPoint> &lista, bool &condicion);
-bool ColoreadoLineal2(QImage &img, KSonda * mapa, cuInt &colorMax, cuInt &colorMin, const QPoint& punto_de_partida, QList<QPoint> &lista, cuInt &id_nuevo_color, bool mod_inverso = false, QImage * capa = nullptr);
-
-#endif // ANSKYESENCIALES_H
+#endif // __AnskyEsenciales

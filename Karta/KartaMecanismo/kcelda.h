@@ -1,21 +1,21 @@
-#ifndef KCELDA_H
-#define KCELDA_H
-#include "kartacoor.h"
+#ifndef __KCelda
+#define __KCelda
+#include "KartaCoor.h"
 #include <QSize>
 #include <QPoint>
-class QSize;
+
 class QMouseEvent;
 class QRect;
 
-class kcelda{
+class KCelda{
     public:
-        kcelda(const QWidget *WIDGET);
-        kcelda(const QSize &tamanyo, const Karta::Modo &Modo = Karta::Relativo);
-        kcelda(const QSize &tamanyo, const QWidget *WIDGET);
-        kcelda(const QSize &tamanyo, const QWidget *WIDGET, const Karta::Modo &Modo);
+        KCelda(const QWidget *WIDGET);
+        KCelda(const QSize &tamanyo, const Karta::Modo &Modo = Karta::Relativo);
+        KCelda(const QSize &tamanyo, const QWidget *WIDGET);
+        KCelda(const QSize &tamanyo, const QWidget *WIDGET, const Karta::Modo &Modo);
 
         QRect qrect(cuShort &idx_h = 0, cuShort &idx_v = 0);
-        ~kcelda();
+        ~KCelda();
 
         void mouseMoveEvent(QMouseEvent *event);
         const k_index &mousePressEvent(QMouseEvent *event);
@@ -65,4 +65,4 @@ class kcelda{
 
     };
 
-#endif // KCELDA_H
+#endif // __KCelda

@@ -5,7 +5,7 @@
 
 Colori_rgb::Colori_rgb(){ inicializar();}
 
-Colori_rgb::~Colori_rgb(){ delete RGB; if(hex) delete[] hex;}
+Colori_rgb::~Colori_rgb(){ if(RGB) delete RGB; if(hex) delete[] hex;}
 
 void Colori_rgb::inicializar(){
     RGB = nullptr;
@@ -14,7 +14,9 @@ void Colori_rgb::inicializar(){
 
 void Colori_rgb::limpiar(){
     delete RGB;
-    if(hex) delete[] hex;}
+    RGB = nullptr;
+    if(hex) delete[] hex;
+    hex = nullptr;}
 
 void Colori_rgb::asignarMemoria(){
     RGB = new c_rgb;

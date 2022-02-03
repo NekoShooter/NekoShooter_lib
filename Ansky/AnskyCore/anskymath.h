@@ -1,5 +1,5 @@
-#ifndef ANSKYMATH_H
-#define ANSKYMATH_H
+#ifndef __AnskyMath
+#define __AnskyMath
 #include <QList>
 #include "__GITICONST__.h"
 
@@ -15,4 +15,4 @@ QList<QPointF> Generar_trianguloRec(cDouble &pos_x, cDouble &pos_y, cDouble &bas
 
 void rotarQPoints(QList<QPoint> *lista, const QPoint &ancla, cDouble &ang);
 void rotarQPointFs(QList<QPointF> *lista,const QPointF &ancla, cDouble &ang);
-#endif // ANSKYMATH_H
+#endif // __AnskyMath

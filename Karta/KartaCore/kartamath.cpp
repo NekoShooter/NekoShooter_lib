@@ -1,4 +1,4 @@
-#include "kartamath.h"
+#include "KartaMath.h"
 #include <QPoint>
 #include <QSize>
 #include <math.h>
@@ -77,6 +77,18 @@ double diferencia_angular(cDouble &anguloInicial, cDouble &anguloFinal){
 
     double resultado = anguloInicial - anguloFinal;
 
-    if(resultado < 0) resultado = 360 + resultado;
+    if(resultado < 0) resultado += 360;
 
     return 360 - resultado;}
+
+
+
+double adicion_angular(cDouble &anguloInicial, cDouble &anguloFinal){
+    if(ANGULO_ERRONEO(anguloInicial) || ANGULO_ERRONEO(anguloFinal)) return  0;
+
+    double resultado = anguloInicial + (360 - anguloFinal);
+
+    if(resultado > 360) resultado -= 360;
+
+    return resultado;
+}

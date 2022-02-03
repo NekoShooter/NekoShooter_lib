@@ -1,5 +1,5 @@
 #include "AnskyTrazado.h"
-#include "kartacoor.h"
+#include "KartaCoor.h"
 
 #include <QPainter>
 
@@ -19,9 +19,6 @@ void UnirPuntos(QPainter &painter, const QList<QPointF> &lista_de_coor, const QP
    for(auto i = lista_de_coor.begin();i + 1 != lista_de_coor.end(); i++)
         painter.drawLine(*i,*(i + 1));
     painter.drawLine(*lista_de_coor.begin(), *(--lista_de_coor.end()));}
-
-
-
 /********************************************************************************/
 
 

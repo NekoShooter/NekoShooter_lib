@@ -1,5 +1,5 @@
-#ifndef ANSKYBASIC_H
-#define ANSKYBASIC_H
+#ifndef __AnskyBasic
+#define __AnskyBasic
 #include "__GITICONST__.h"
 #include "__ANSKYCONST__.h"
 #include <QList>
@@ -18,4 +18,4 @@ QList<QPointF> coor_triangulo(const QRect & rec, const QPointF &ancla = QPointF(
 QList <QPointF>coor_triangulo(cShort &pos_x, cShort &pos_y, cuShort &base, cuShort &altura, cShort &ancla_x = 0, cShort &ancla_y = 0, cuShort &ang = 0);
 
 
-#endif // ANSKYBASIC_H
+#endif // __AnskyBasic

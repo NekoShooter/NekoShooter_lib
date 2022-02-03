@@ -1,12 +1,13 @@
 #include "AnskyBG.h"
 #include "AnskyEsenciales.h"
-#include "Colori__rgb__.h"
-#include "ColoriMath.h"
 #include <QImage>
 #include <QImageReader>
 #include "ColoriUtiles.h"
 #include "AnskyShorts.h"
 #include "KSonda.h"
+#include <QPainter>
+#include <QMatrix>
+#include "KartaCoor.h"
 
 QImage *CargarImagen(const QString &direccion){
     if(direccion.isEmpty()) return nullptr;
@@ -19,64 +20,46 @@ QImage *CargarImagen(const QString &direccion){
     else lector.read(Imagen);
 
     return Imagen;}
-
-
 /************************************************************************************/
 
 
+void Pegado(QImage *&base, const QImage *imagen, const int &x, const int &y){
+    if(!base || !imagen) return;
+    if(base->isNull() || imagen->isNull()) return;
 
-QImage *Colorear(QImage *&imagen, const QPoint &coordenada, cuInt id_nuevo_color, const bool &capa_independiente){
+    QImage *lienzo = base;
+    QRect rect = base->rect().united(QRect(QPoint(x,y),imagen->size()));
+
+    lienzo = nuevoQImage(rect.size());
+    if(!lienzo) return;
+
+    QPainter painter(lienzo);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+    painter.drawImage(0,0, *base);
+    painter.drawImage(x,y, *imagen);
+    painter.end();
+
+    delete base;
+    base = lienzo;}
+/************************************************************************************/
+
+
+QImage *Coloreado(QImage *&imagen, const QPoint &coor, const QMatrix &matriz, cuInt color, cuChar &umbral, const bool &capa_independiente, const bool &limitar){
+    return Coloreado(imagen,ReCalcularCoordenada(coor,matriz).toPoint(),color,umbral,capa_independiente,limitar);}
+
+
+QImage *Coloreado(QImage *&imagen, const QPoint &coor, cuInt color, cuChar &umbral, const bool &capa_independiente, const bool &limitar){
     if(!imagen || imagen->isNull()) return nullptr;
+    if(limitar && imagen->pixelColor(coor).rgba() == color) return nullptr;
+    if(coor.x() > imagen->width() || coor.y() > imagen->height()) return nullptr;
+    if(coor.x() < 0 || coor.y() < 0) return nullptr;
 
-    QRgb Color_del_pixel = imagen->pixelColor(coordenada).rgba();
+    uInt _max = 0, _min = 0;
+    RangoDeSimilaridad(imagen->pixelColor(coor).rgba(),&_max,&_min,umbral);
 
-    if(id_nuevo_color == Color_del_pixel) return nullptr;
+    QImage *capa = imagen;
 
-    QImage *capa = nullptr;
-    QImage *img = imagen;
-
-
-    if(capa_independiente){
-        img = new QImage(*imagen);
-        capa = new QImage(imagen->size(),QImage::Format_ARGB32_Premultiplied);
-        capa->fill(QColor(0,0,0,0).rgba());}
-
-    QList<QPoint> coor_pendientes;
-    coor_pendientes.append(coordenada);
-
-    bool Ok_d,
-         Ok_i;
-
-    while(!coor_pendientes.isEmpty()){
-        const QPoint p = coor_pendientes.back();
-                         coor_pendientes.pop_back();
-        Ok_d = ColoreadoLineal(*img,Color_del_pixel,p,coor_pendientes,id_nuevo_color,false,capa);
-        Ok_i = ColoreadoLineal(*img,Color_del_pixel,p,coor_pendientes,id_nuevo_color,true,capa);
-
-        if(!Ok_d || !Ok_i){
-            if(capa) delete capa;
-            capa = nullptr;
-            break;}};
-
-    if(capa_independiente && img)delete img;
-    return capa;}
-
-
-/*******************************************************************************/
-
-
-QImage *Colorear2(QImage *&imagen, const QPoint &coor, cuInt color, cuChar &umbral, const bool &capa_independiente){
-    if(!imagen || imagen->isNull()) return nullptr;
-
-    c_rgb max = {imagen->pixelColor(coor).rgba()};
-    c_rgb min = {imagen->pixelColor(coor).rgba()};
-
-    autoIncrementarLuminicencia(&max,umbral);
-    autoIncrementarLuminicencia(&min,-umbral);
-
-    QImage *capa = nullptr;
-    KSonda *mapa = new KSonda(imagen->size());
-    if(capa_independiente){ capa = nuevoQImage(imagen->size()); }
+    if(capa_independiente) capa = nuevoQImage(imagen->size());
 
     QList<QPoint> cola;
     cola.append(coor);
@@ -87,13 +70,31 @@ QImage *Colorear2(QImage *&imagen, const QPoint &coor, cuInt color, cuChar &umbr
     while(!cola.isEmpty()){
         const QPoint p = cola.back();
                          cola.pop_back();
-        Ok_d = ColoreadoLineal2(*imagen,mapa,max.id_a,min.id_a,p,cola,color,false,capa);
-        Ok_i = ColoreadoLineal2(*imagen,mapa,max.id_a,min.id_a,p,cola,color,true,capa);
+        Ok_d = ColoreadoLineal(imagen,capa,color,_max,_min,p,cola,false,limitar);
+        Ok_i = ColoreadoLineal(imagen,capa,color,_max,_min,p,cola,true,limitar);
 
         if(!Ok_d || !Ok_i){
-            if(capa) delete capa;
-            capa = nullptr;
-            break;}};
-    delete mapa;
+            if(capa_independiente) delete capa;
+            return nullptr;}};
+
+    if(capa_independiente) return capa;
+    return nullptr;}
+/*******************************************************************************/
+
+
+QImage *testKSonda(QImage *&imagen, const QPoint &coor, cuInt color, cuChar &umbral, const bool &capa_independiente, const bool &limitar){
+    if(!imagen || imagen->isNull()) return nullptr;
+    KSonda e(*imagen, coor,umbral,limitar);
+    if(!e.esValido())return  nullptr;
+    QImage *img = imagen;
+    QImage *capa = nullptr;
+
+    if(capa_independiente){
+        capa = nuevoQImage(imagen->size());
+        img = capa;}
+    for(uInt i = e.begin(); i < e.end(); ++i)
+        img->setPixel(e.iterator(),color);
+
     return capa;
+
 }
