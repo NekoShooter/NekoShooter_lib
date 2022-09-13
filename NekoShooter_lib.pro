@@ -24,7 +24,8 @@ INCLUDEPATH += Colori \ Giti \ Karta \ Ansky \
     Karta/KartaMecanismo \
     Karta/KartaUtiles \
     Ansky/AnskyCore \
-    Ansky/AnskyUtiles
+    Ansky/AnskyUtiles \
+    Hatsu
 
 
 SOURCES += \
@@ -44,10 +45,15 @@ SOURCES += \
     Karta/KartaCore/KartaCoor.cpp \
     Karta/KartaCore/KartaEsencial.cpp \
     Karta/KartaCore/KartaMath.cpp \
+    Karta/KartaCore/KartaAlgoritmo.cpp \
     Karta/KartaMecanismo/KSonda.cpp \
     Karta/KartaMecanismo/KCelda.cpp \
     Karta/KartaMecanismo/KTimon.cpp \
-    Karta/KartaUtiles/KArea.cpp
+    Karta/KartaMecanismo/KRuta.cpp \
+    Karta/KartaMecanismo/KZona.cpp \
+    Karta/KartaUtiles/KArea.cpp \
+    Karta/KartaUtiles/KMap.cpp \
+    Hatsu/HNotificador.cpp
 
 HEADERS += \
     Ansky/AnskyCore/AnskyBasic.h \
@@ -69,11 +75,18 @@ HEADERS += \
     Karta/KartaCore/KartaCoor.h \
     Karta/KartaCore/KartaEsencial.h \
     Karta/KartaCore/KartaMath.h \
+    Karta/KartaCore/KartaAlgoritmo.h \
     Karta/KartaCore/__KARTACONST__.h \
     Karta/KartaMecanismo/KSonda.h \
     Karta/KartaMecanismo/KCelda.h \
     Karta/KartaMecanismo/KTimon.h \
-    Karta/KartaUtiles/KArea.h
+    Karta/KartaMecanismo/KRuta.h \
+    Karta/KartaMecanismo/KZona.h \
+    Karta/KartaUtiles/KArea.h \
+    Karta/KartaUtiles/KMap.h \
+    Hatsu/HRango.h \
+    Hatsu/HPtr.h \
+    Hatsu/HNotificador.h
 
 # Default rules for deployment.
 unix {

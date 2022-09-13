@@ -6,7 +6,6 @@
 class QMatrix;
 class QSize;
 class QWidget;
-//class QPoint;
 class QPointF;
 class QImage;
 class QRect;

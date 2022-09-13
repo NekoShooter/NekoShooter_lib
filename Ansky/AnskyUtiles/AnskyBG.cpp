@@ -45,7 +45,7 @@ void Pegado(QImage *&base, const QImage *imagen, const int &x, const int &y){
 
 
 QImage *Coloreado(QImage *&imagen, const QPoint &coor, const QMatrix &matriz, cuInt color, cuChar &umbral, const bool &capa_independiente, const bool &limitar){
-    return Coloreado(imagen,ReCalcularCoordenada(coor,matriz).toPoint(),color,umbral,capa_independiente,limitar);}
+    return Coloreado(imagen,ReTransformaCoordenadaF(coor,matriz).toPoint(),color,umbral,capa_independiente,limitar);}
 
 
 QImage *Coloreado(QImage *&imagen, const QPoint &coor, cuInt color, cuChar &umbral, const bool &capa_independiente, const bool &limitar){
@@ -84,16 +84,28 @@ QImage *Coloreado(QImage *&imagen, const QPoint &coor, cuInt color, cuChar &umbr
 
 QImage *testKSonda(QImage *&imagen, const QPoint &coor, cuInt color, cuChar &umbral, const bool &capa_independiente, const bool &limitar){
     if(!imagen || imagen->isNull()) return nullptr;
-    KSonda e(*imagen, coor,umbral,limitar);
-    if(!e.esValido())return  nullptr;
+    //KSonda e(*imagen, coor,umbral,limitar);
+     KSonda e(*imagen,imagen->pixelColor(coor).rgba(),umbral);
+    if(!e.esValido())return nullptr;
+    KMap * map = e.Mapa();
     QImage *img = imagen;
     QImage *capa = nullptr;
 
     if(capa_independiente){
         capa = nuevoQImage(imagen->size());
         img = capa;}
-    for(uInt i = e.begin(); i < e.end(); ++i)
-        img->setPixel(e.iterator(),color);
+/*
+    for (uint x = map->xBegin(); x < map->xEnd(); ++x){
+        for (uint y = map->yBegin(); y < map->yEnd(); ++y){
+            if(map->maya()[x][y].on){
+                img->setPixel(map->Coor(x,y),color);
+            }
+        }
+    }*/
+
+
+    for(uInt i = map->begin(); i < map->end(); ++i)
+        img->setPixel(map->iterator(),color);
 
     return capa;
 
